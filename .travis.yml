@@ -1,10 +1,7 @@
 language: go
 
 go: 
- - "stable"
-
-env:
-  - GO111MODULE=on
+ - "1.13"
 
 script:
   - go test -v -race -coverprofile=coverage.txt -covermode=atomic
