@@ -13,7 +13,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func mgsClient() *http.Client {
+func createMgsClient() *http.Client {
 	client := http.Client{}
 	client.Jar, _ = cookiejar.New(nil)
 	url, _ := url.Parse("https://www.mgstage.com/")
@@ -28,6 +28,8 @@ func mgsClient() *http.Client {
 	}})
 	return &client
 }
+
+var mgsClient = createMgsClient()
 
 func mgsEngine(
 	keyword string,
@@ -63,7 +65,7 @@ func mgsParseSearchPage(
 	metach chan MovieMeta) {
 	doc, err := newDocument(
 		urlstr,
-		mgsClient().Get,
+		mgsClient.Get,
 	)
 	if err != nil {
 		return
@@ -93,7 +95,7 @@ func mgsParseSearchPage(
 }
 
 func mgsParseProductPage(urlstr string, keyword string, metach chan MovieMeta) {
-	doc, err := newDocument(urlstr, mgsClient().Get)
+	doc, err := newDocument(urlstr, mgsClient.Get)
 	if err != nil {
 		return
 	}
