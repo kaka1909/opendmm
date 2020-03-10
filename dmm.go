@@ -13,7 +13,7 @@ import (
 
 func dmmEngine(keyword string, wg *sync.WaitGroup, metach chan MovieMeta) {
 	urlstr := fmt.Sprintf(
-		"http://www.dmm.co.jp/search/=/searchstr=%s",
+		"http://www.dmm.com/search/=/searchstr=%s",
 		url.QueryEscape(
 			regexp.MustCompile("(?i)[a-z].*").FindString(keyword),
 		),
